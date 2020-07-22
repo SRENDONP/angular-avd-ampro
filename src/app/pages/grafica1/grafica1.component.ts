@@ -12,7 +12,7 @@ export class Grafica1Component implements OnInit {
   public labels1 : string[]= ['Pan', 'Arepas', 'Huevos'];
 
   public data1 = [
-    [350, 450, 200],
+    [250, 150, 200],
   ]
   constructor() { }
 
