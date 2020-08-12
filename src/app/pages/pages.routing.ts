@@ -1,5 +1,5 @@
 import {Routes, RouterModule}  from  '@angular/router'
-import {NgModule} from '@angular/core'
+import { NgModule } from '@angular/core'
 import { AuthGuard } from '../guards/auth.guard';
 
 import { PagesComponent } from './pages.component';
@@ -9,6 +9,7 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes=[
     {
@@ -21,6 +22,7 @@ const routes: Routes=[
           {path: 'grafica1', component: Grafica1Component, data:{titulo:'Graficas'}},
           {path: 'account-settings', component: AccountSettingsComponent, data:{titulo:'Configuración'}},
           {path: 'promesas', component: PromesasComponent, data:{titulo:'Promesas'}},
+          {path: 'perfil', component: PerfilComponent, data:{titulo:'Perfil'}},
           {path: 'rxjs', component: RxjsComponent, data:{titulo:'Operadores RXJS'}},
           //{path: '', redirectTo:'/dashboard', pathMatch:'full'},
         ]

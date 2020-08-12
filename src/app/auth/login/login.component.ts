@@ -62,17 +62,12 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSuccess(googleUser) {
+  //onSuccess(googleUser) {
     //console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     
     //console.log(id_token);
     
-  }
-
-
-  onFailure(error) {
-    console.log(error);
-  }
+  //}
 
   renderButton() {
     gapi.signin2.render('my-signin2', {
@@ -80,25 +75,19 @@ export class LoginComponent implements OnInit {
       'width': 240,
       'height': 50,
       'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': this.onSuccess,
-      'onfailure': this.onFailure
+      'theme': 'dark'
     });
 
     this.startApp();
   }
 
-  startApp = function() {
-    gapi.load('auth2', () => {
-      // Retrieve the singleton for the GoogleAuth library and set up the client.
-      this.auth2 = gapi.auth2.init({
-        client_id: '183000698718-e4kdbuc6acl8vcmcovofslkl2fr7inra.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        // Request scopes in addition to 'profile' and 'email'
-        //scope: 'additional_scope'
-      });
-      this.attachSignin(document.getElementById('my-signin2'));
-    });
+  async startApp() {
+    
+    await this.usuarioService.googleInit();
+    this.auth2 = this.usuarioService.auth2;  
+    
+    this.attachSignin(document.getElementById('my-signin2'));
+    
   };
 
 
@@ -107,17 +96,15 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(element, {},
         (googleUser) => {
           const id_token = googleUser.getAuthResponse().id_token;
-          //console.log(id_token);
-          this.usuarioService.loginGoogle(id_token).subscribe( resp => {
-            
+          console.log('token encontrado ' + id_token);
+          this.usuarioService.loginGoogle( id_token ).subscribe( resp => {
+            //navegar al dashboard
             this.ngZone.run(()=>{ // el ng zone es para ejecutar librerias externas a angular
-              this.router.navigateByUrl('/');  
-            })
+              this.router.navigateByUrl('/');  //no esta funcionando el redirect
+              console.log('redireccion al login');
+            });
 
           });
-
-
-
         
         },(error) => {
           alert(JSON.stringify(error, undefined, 2));
