@@ -11,6 +11,11 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
+//Mantenimientos
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+
 const routes: Routes=[
     {
         path: 'dashboard', //esto me indica que siempre que vaya a otra pag diferente al dashboard, en la url me deje el dashboard y luego la otra pagina
@@ -25,6 +30,11 @@ const routes: Routes=[
           {path: 'perfil', component: PerfilComponent, data:{titulo:'Perfil'}},
           {path: 'rxjs', component: RxjsComponent, data:{titulo:'Operadores RXJS'}},
           //{path: '', redirectTo:'/dashboard', pathMatch:'full'},
+
+          //Rutas de Manternimientos
+          {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Usuarios'}},
+          {path: 'hospitales', component: HospitalesComponent, data:{titulo:'Hospitales'}},
+          {path: 'medicos', component: MedicosComponent, data:{titulo:'Medicos'}},
         ]
       },
 

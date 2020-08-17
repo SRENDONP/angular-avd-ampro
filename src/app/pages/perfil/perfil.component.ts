@@ -14,23 +14,22 @@ import Swal from 'sweetalert2';
 export class PerfilComponent implements OnInit {
 
   public perfilForm: FormGroup;
-  public usuario:Usuario;
-  public imagenSubir:File;
-  public imgTem:any = null;
+  public usuario: Usuario;
+  public imagenSubir: File;
+  public imgTem: any = null;
 
 
-  constructor(private fb:FormBuilder, private usuarioService: UsuarioService, private fileUploadService :FileUploadService) { 
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private fileUploadService: FileUploadService) {
 
     this.usuario = usuarioService.usuario; // esto es para que me cargue los datos de el usuario registrado en en la parte superior derecha
   }
 
   ngOnInit(): void {
-  
-    this.perfilForm = this.fb.group({ //con esto defino los campos que va a tener el perfil form que voy a trabajar
-      nombre:[this.usuario.nombre, Validators.required],
-      email:[this.usuario.email, [Validators.required, Validators.email]]
-    })
 
+    this.perfilForm = this.fb.group({ //con esto defino los campos que va a tener el perfil form que voy a trabajar
+      nombre: [this.usuario.nombre, Validators.required],
+      email: [this.usuario.email, [Validators.required, Validators.email]]
+    })
   }
 
 
@@ -44,15 +43,15 @@ export class PerfilComponent implements OnInit {
       this.usuario.email = email;
 
       Swal.fire('Guardado', 'Perfil Modificado Correctamente','success');
-    },(err)=>{
-      
+    },( err ) => {
+
       Swal.fire('Error', err.error.msg,'error');
-      
+
     })
   }
 
-  cambiarImagen(file:File){
-    this.imagenSubir =file;
+  cambiarImagen(file: File){
+    this.imagenSubir = file;
 
     if(!file){
       return this.imgTem = null;
@@ -61,17 +60,21 @@ export class PerfilComponent implements OnInit {
     const reader = new FileReader(); //esto ya es propio de angular es para cambiar la imagen en tiempo real apenas yo suba una
     reader.readAsDataURL(file);
 
-    reader.onloadend=()=>{
+    reader.onloadend = () => {
       this.imgTem = reader.result;
     }
   }
 
-  subirImagen(){
-    this.fileUploadService.actualizarFoto(this.imagenSubir,'usuarios',this.usuario.uid)
-    .then(img => this.usuario.img = img
-    );
-
-    Swal.fire('Guardado', 'Imagen Cargada Correctamente','success');
+  subirImagen() {
+    this.fileUploadService
+      .actualizarFoto(this.imagenSubir, 'usuarios', this.usuario.uid)
+      .then(img => {
+        this.usuario.img = img;
+        Swal.fire('Guardado', 'Imagen Cargada Correctamente', 'success');
+      }).catch(err => {
+      console.log(err);
+      Swal.fire('Guardado', 'Imagen Cargada Correctamente', 'success');
+    })
   }
 
-}
+  }

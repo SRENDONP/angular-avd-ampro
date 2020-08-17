@@ -26,17 +26,13 @@ export class LoginComponent implements OnInit {
     remember:[false]
   });
 
-  constructor(private fb:FormBuilder, 
+  constructor(private fb: FormBuilder,
               private router: Router,
               private usuarioService: UsuarioService,
               private ngZone: NgZone){ }
   ngOnInit(): void {
     this.renderButton();
   }
-
-  
-
-  
 
   login(){
     //this.router.navigateByUrl('/');
@@ -56,17 +52,17 @@ export class LoginComponent implements OnInit {
       Swal.fire('Error', err.error.msg,'error');
 
     });
-    
+
     console.log(this.loginForm.value);
-    
+
 
   }
 
   //onSuccess(googleUser) {
     //console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    
+
     //console.log(id_token);
-    
+
   //}
 
   renderButton() {
@@ -82,12 +78,12 @@ export class LoginComponent implements OnInit {
   }
 
   async startApp() {
-    
+
     await this.usuarioService.googleInit();
-    this.auth2 = this.usuarioService.auth2;  
-    
+    this.auth2 = this.usuarioService.auth2;
+
     this.attachSignin(document.getElementById('my-signin2'));
-    
+
   };
 
 
@@ -99,14 +95,13 @@ export class LoginComponent implements OnInit {
           console.log('token encontrado ' + id_token);
           this.usuarioService.loginGoogle( id_token ).subscribe( resp => {
             //navegar al dashboard
-            this.ngZone.run(()=>{ // el ng zone es para ejecutar librerias externas a angular
+            this.ngZone.run(() => { // el ng zone es para ejecutar librerias externas a angular
               this.router.navigateByUrl('/');  //no esta funcionando el redirect
               console.log('redireccion al login');
             });
 
           });
-        
-        },(error) => {
+        }, (error) => {
           alert(JSON.stringify(error, undefined, 2));
         });
   }
