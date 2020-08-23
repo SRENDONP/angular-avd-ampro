@@ -4,21 +4,20 @@ import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from './../pipes/pipes.module';
 
-import { ProgressComponent } from './progress/progress.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
-import { PagesComponent } from './pages.component';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { PromesasComponent } from './promesas/promesas.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
-import { PerfilComponent } from './perfil/perfil.component';
-import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
-
-
-
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { PagesComponent } from './pages.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ProgressComponent } from './progress/progress.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 
 @NgModule({
@@ -33,9 +32,10 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
     PerfilComponent,
     UsuariosComponent,
     HospitalesComponent,
-    MedicosComponent
+    MedicosComponent,
+    MedicoComponent
   ],
-  exports:[
+  exports: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
@@ -46,10 +46,11 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
     CommonModule,
     SharedModule,
     AppRoutingModule,
-    ReactiveFormsModule, //este es para trabajar los formularios reactivos como el de perfil
+    ReactiveFormsModule, // este es para trabajar los formularios reactivos como el de perfil
     FormsModule,
     ComponentsModule,
-    
+    PipesModule
+
   ]
 })
 export class PagesModule { }

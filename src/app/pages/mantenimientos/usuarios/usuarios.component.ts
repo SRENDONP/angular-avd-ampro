@@ -15,7 +15,7 @@ import {Subscription} from "rxjs";
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
 
-  public totalUsuarios: number= 0;
+  public totalUsuarios: number = 0;
   public usuarios: Usuario[] = [];
   public usuariosTemp: Usuario[] = [];
 
@@ -28,7 +28,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
               private modalImagenService: ModalImagenService ) { }
 
   ngOnDestroy(): void {
-    this.imgSubs.unsubscribe()
+    this.imgSubs.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
 
     this.busqueda.buscar('usuarios', termino)
-      .subscribe(resp => {
+      .subscribe((resp: Usuario[]) => {
         this.usuarios = resp;
       });
   }
