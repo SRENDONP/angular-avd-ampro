@@ -39,6 +39,10 @@ export class UsuarioService {
     return this.usuario.uid || '';
   }
 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE'{
+    return this.usuario.role;
+  }
+
   //aqui obtengo los headers para las peticiones
   get headers(){
     return { headers: {
@@ -62,9 +66,15 @@ export class UsuarioService {
     });
   }
 
+  guardarLocalStorage(token: string, menu: any){
+    localStorage.setItem('token', token); // aqui estoy guardando el token del backen en el localstorage
+    localStorage.setItem('menu', JSON.stringify(menu)); //aqui estoy guardando el menu que puede visualizar
+  }
+
   // funcion logout
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
 
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
@@ -89,7 +99,7 @@ export class UsuarioService {
         } = resp.usuario; // aqui desestructuro las propiedades del objeto usuario
 
         this.usuario = new Usuario (nombre, email, '', img, google, role, uid);  // aqui creo mi instancia de usuario
-        localStorage.setItem('token', resp.token); // aqui estoy guardando el token del backen en el localstorage
+        this.guardarLocalStorage(resp.token, resp.menu); //aqui llamo la funcion que me guarda en el local storage el menu y el token
         return true;
     }),
     catchError(error => of (false) )
@@ -101,7 +111,7 @@ export class UsuarioService {
 
     return this.http.post(`${base_url}/usuarios`, formData) // de esta manera estoy haciendo el post para crear el usuarioesta instruccion me retorna un observable con la respuesta del backend
     .pipe(tap((resp: any) => { // el tap es para ejecutar otra instruccion adicional aparte del login
-      localStorage.setItem('token', resp.token); // aqui estoy guardando el token del backen en el localstorage
+      this.guardarLocalStorage(resp.token, resp.menu); //aqui llamo la funcion que me guarda en el local storage el menu y el token
     })
   );
 
@@ -123,7 +133,7 @@ export class UsuarioService {
 
     return this.http.post(`${base_url}/login`, formData) // de esta manera estoy haciendo el post para el logueo esta instruccion me retorna un observable con la respuesta del backend
     .pipe(tap((resp: any) => { // el tap es para ejecutar otra instruccion adicional aparte del login
-      localStorage.setItem('token', resp.token); // aqui estoy guardando el token del backen en el localstorage
+        this.guardarLocalStorage(resp.token, resp.menu); //aqui llamo la funcion que me guarda en el local storage el menu y el token
   })
   );
   }
@@ -133,7 +143,7 @@ export class UsuarioService {
 
     return this.http.post(`${base_url}/login/google`, {token}) // de esta manera estoy haciendo el post para el logueo esta instruccion me retorna un observable con la respuesta del backend
     .pipe(tap((resp: any) => { // el tap es para ejecutar otra instruccion adicional aparte del login
-      localStorage.setItem('token', resp.token); // aqui estoy guardando el token del backen en el localstorage
+        this.guardarLocalStorage(resp.token, resp.menu); //aqui llamo la funcion que me guarda en el local storage el menu y el token
   })
   );
   }

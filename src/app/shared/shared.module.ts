@@ -5,6 +5,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -18,11 +19,12 @@ import { RouterModule } from '@angular/router';
     BreadcrumbsComponent,
     SidebarComponent,
     HeaderComponent
-    
+
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule // el formmodule permite que angular tome control de formulario sin refrescar la pagina cada que se hagan un cambio
   ]
 })
 export class SharedModule { }

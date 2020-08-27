@@ -18,6 +18,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { BusquedasComponent } from './busquedas/busquedas.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
-    MedicoComponent
+    MedicoComponent,
+    BusquedasComponent
   ],
   exports: [
     DashboardComponent,

@@ -15,6 +15,5 @@ export class Medico {
     public usuario?: _MedicoUser,
     public hospital?: Hospital,
 
-  ) {
-  }
+  ) {  }
 }

@@ -33,7 +33,7 @@ export class MedicoComponent implements OnInit {
               private activateRoute: ActivatedRoute) { }  // para trabajar con formularios reactivos siempre debo usar el formbuilder
 
   ngOnInit(): void {
-    //aqui tomo el control del formulario y las avlidaciones
+    // aqui tomo el control del formulario y las avlidaciones
     this.medicoForm = this.fb.group({
       nombre: ['', Validators.required],
       hospital: ['', Validators.required],
@@ -63,17 +63,17 @@ export class MedicoComponent implements OnInit {
       return;
     }
 
-    this.medicoService.cargarMedicosPorId( id )
+    this.medicoService.cargarMedicoPorId( id )
       .pipe(
         delay(100)
       )
-      .subscribe( medico => {
+      .subscribe( (medico: Medico) => {
 
         if ( !medico ) {
           return this.router.navigateByUrl(`/dashboard/medicos`);
         }
 
-        const { nombre, hospital:{ _id } } = medico;
+        const { nombre, hospital: { _id } } = medico;
         this.medicoSeleccionado = medico;
         this.medicoForm.setValue({ nombre, hospital: _id });
       });
@@ -91,8 +91,8 @@ export class MedicoComponent implements OnInit {
   guardarMedico(){
     const {nombre} = this.medicoForm.value;
 
-    if(this.medicoSeleccionado){
-      //actualizar
+    if (this.medicoSeleccionado){
+      // actualizar
       const data = {
         ...this.medicoForm.value,
         _id: this.medicoSeleccionado._id

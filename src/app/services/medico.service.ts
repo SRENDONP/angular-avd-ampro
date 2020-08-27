@@ -42,14 +42,13 @@ export class MedicoService {
   }
 
   // Metodo GET Para Cargar el medico por id
-  cargarMedicosPorId(id: string){
-    const url = `${base_url}/medico/${id}`;
+  cargarMedicoPorId( id: string ) {
 
-    return this.http.get(url, this.headers)
+    const url = `${ base_url }/medico/${ id }`;
+    return this.http.get( url, this.headers )
       .pipe(
-        map((resp: {
-          ok: boolean,
-          medico: Medico[]}) => resp.medico));
+        map( (resp: {ok: boolean, medico: Medico }) => resp.medico )
+      );
   }
 
 

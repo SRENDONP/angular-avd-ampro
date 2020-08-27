@@ -50,6 +50,14 @@ export class BusquedasService {
     return resultados
   }
 
+  //esta es la funcion para realizar las busquedas globales en todas las colecciones
+  busquedaGlobal(termino: string){
+    const url = `${base_url}/todo/${termino}`;
+
+    return this.http.get(url, this.headers);
+
+  }
+
   //funcion para realizar busquedas
   buscar(
     tipo: 'usuarios'|'medicos'|'hospitales',

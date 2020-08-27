@@ -6,7 +6,14 @@ import { Injectable } from '@angular/core';
 //Este servicio es el que me maneja toda las opciones del dashboard desde la navegabilidad
 export class SidebarService {
 
-  menu:any[] = [
+  public menu = [];
+
+  cargarMenu() {
+    this.menu = JSON.parse(localStorage.getItem('menu')) || [];
+    }
+
+
+  /*menu:any[] = [
     {titulo: 'Dashboard',
       icono:'mdi mdi-gauge',
       submenu:[
@@ -26,7 +33,7 @@ export class SidebarService {
         {titulo:'Medicos', url:'medicos'},
       ]
     }
-  ]
+  ]*/
 
   constructor() { }
 }
