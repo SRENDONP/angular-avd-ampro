@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url:'http://localhost:3000/api' //aqui estoy definiendo la ruta para pruebas
+  base_url: 'https://gentle-taiga-46570.herokuapp.com/api' //aqui estoy definiendo la ruta para pruebas
 };
 
 /*
